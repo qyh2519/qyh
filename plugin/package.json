@@ -1,0 +1,17 @@
+{
+  "name": "@dsh-user/gw-autostart",
+  "description": "DSH 启动时自动拉起网页版 DeepSeek 网关",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1"
+  }
+}

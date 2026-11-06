@@ -1,0 +1,58 @@
+# dsh settings — 用户设置文档(热重载)。
+agent-default-model:
+  provider: deepseek-web
+  model: deepseek-chat
+
+# 百炼(阿里云)OpenAI 兼容端点:新用户免费额度覆盖多个模型。
+# 这些模型在模型下拉中会被统一折叠成一个「免费额度」选项,
+# 额度耗尽自动切换下一个,全部用完确认后移除该选项。
+llm-pi-ai:
+  providers:
+    bailian:
+      apiKeyEnv: BAILIAN_API_KEY
+      displayName: 百炼免费额度
+      api: openai-completions
+      baseURL: https://dashscope.aliyuncs.com/compatible-mode/v1
+      models:
+        - id: qwen-turbo
+          name: Qwen Turbo
+        - id: qwen-plus
+          name: Qwen Plus
+        - id: qwen-max
+          name: Qwen Max
+        - id: qwen-long
+          name: Qwen Long
+        - id: qwen-flash
+          name: Qwen Flash
+        - id: qwen3-turbo
+          name: Qwen3 Turbo
+        - id: qwen3-plus
+          name: Qwen3 Plus
+        - id: qwen3-max
+          name: Qwen3 Max
+        - id: qwen-vl-plus
+          name: Qwen VL Plus
+        - id: qwen-vl-max
+          name: Qwen VL Max
+
+    # 网页版 DeepSeek:通过本地网关 deepseek-web-gateway.mjs 把
+    # chat.deepseek.com 网页版封装成 OpenAI 兼容 API。
+    # 网关需先启动:node /data/dsh/home/deepseek-web-gateway.mjs
+    deepseek-web:
+      apiKeyEnv: DEEPSEEK_WEB_API_KEY
+      displayName: 网页版DS
+      api: openai-completions
+      baseURL: http://127.0.0.1:8787/v1
+      models:
+        - id: deepseek-chat
+          name: DeepSeek 网页版
+        - id: deepseek-reasoner
+          name: DeepSeek 网页版(思考)
+free-pool:
+  pools:
+    bailian:
+      exhausted:
+        - qwen-turbo
+        - qwen-plus
+        - qwen-max
+      confirmed: false
